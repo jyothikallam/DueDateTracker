@@ -60,41 +60,51 @@ class ItemDetailViewController: UIViewController , UITableViewDataSource, UITabl
 
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
+        if section == 0 {
+            return 5
+        }
+        return 1
+    }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 2
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        switch indexPath.row {
-        case 0: let cell = tableView.dequeueReusableCellWithIdentifier("detailCell", forIndexPath: indexPath) as! EditItemDetailTableViewCell
-                cell.myTextField?.text = "\(values[indexPath.row])"
-                cell.myLabel?.text = "Bill Name:"
-                return cell
-        case 1: let cell = tableView.dequeueReusableCellWithIdentifier("detailCell", forIndexPath: indexPath) as! EditItemDetailTableViewCell
-                cell.myTextField?.text = "\(values[indexPath.row])"
-                cell.myLabel?.text = "Category:"
-                return cell
-        case 2: let cell = tableView.dequeueReusableCellWithIdentifier("detailCell", forIndexPath: indexPath) as! EditItemDetailTableViewCell
-                cell.myTextField?.text = "\(values[indexPath.row])"
-                cell.myLabel?.text = "Due Date:"
-                return cell
-        case 3: let cell = tableView.dequeueReusableCellWithIdentifier("detailCell", forIndexPath: indexPath) as! EditItemDetailTableViewCell
-                cell.myTextField?.text = "\(values[indexPath.row])"
-                cell.myLabel?.text = "Description:"
-                return cell
-        case 4: let cell = tableView.dequeueReusableCellWithIdentifier("detailCell", forIndexPath: indexPath) as! EditItemDetailTableViewCell
-                cell.myTextField?.text = "\(values[indexPath.row])"
-                cell.myLabel?.text = "Repeat:"
-                return cell
-            
-       case 5:  let cell1 = tableView.dequeueReusableCellWithIdentifier("cell1", forIndexPath: indexPath) as! DeleteItemTableViewCell
-                cell1.delegate = self
-                return cell1
-                //cell.myTextField!.font = UIFont(name: "Helvetica-Bold", size: 18.0)
-                // cell.myTextField!.textColor = UIColor.redColor()
+        if indexPath.section == 0 {
+            switch indexPath.row {
+            case 0: let cell = tableView.dequeueReusableCellWithIdentifier("detailCell", forIndexPath: indexPath) as! EditItemDetailTableViewCell
+                    cell.myTextField?.text = "\(values[indexPath.row])"
+                    cell.myLabel?.text = "Bill Name:"
+                    return cell
+            case 1: let cell = tableView.dequeueReusableCellWithIdentifier("detailCell", forIndexPath: indexPath) as! EditItemDetailTableViewCell
+                    cell.myTextField?.text = "\(values[indexPath.row])"
+                    cell.myLabel?.text = "Category:"
+                    return cell
+            case 2: let cell = tableView.dequeueReusableCellWithIdentifier("detailCell", forIndexPath: indexPath) as! EditItemDetailTableViewCell
+                    cell.myTextField?.text = "\(values[indexPath.row])"
+                    cell.myLabel?.text = "Due Date:"
+                    return cell
+            case 3: let cell = tableView.dequeueReusableCellWithIdentifier("detailCell", forIndexPath: indexPath) as! EditItemDetailTableViewCell
+                    cell.myTextField?.text = "\(values[indexPath.row])"
+                    cell.myLabel?.text = "Description:"
+                    return cell
+            case 4: let cell = tableView.dequeueReusableCellWithIdentifier("detailCell", forIndexPath: indexPath) as! EditItemDetailTableViewCell
+                    cell.myTextField?.text = "\(values[indexPath.row])"
+                    cell.myLabel?.text = "Repeat:"
+                    return cell
 
-        default:let cell1 = tableView.dequeueReusableCellWithIdentifier("cell1", forIndexPath: indexPath)
-                return cell1
+            default:let cell = tableView.dequeueReusableCellWithIdentifier("detailCell", forIndexPath: indexPath) as! EditItemDetailTableViewCell
+                    return cell
+            }
+        }
+        else {
+            let cell1 = tableView.dequeueReusableCellWithIdentifier("cell1", forIndexPath: indexPath) as! DeleteItemTableViewCell
+            cell1.delegate = self
+            return cell1
+            //cell.myTextField!.font = UIFont(name: "Helvetica-Bold", size: 18.0)
+            // cell.myTextField!.textColor = UIColor.redColor()
         }
     }
     func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
@@ -102,5 +112,15 @@ class ItemDetailViewController: UIViewController , UITableViewDataSource, UITabl
             deleteItem()
         }
     }
+    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let hView = UIView(frame: CGRectMake(0, 0, self.myTableView.frame.size.width, 30))
+        return hView
+    }
+    
+//    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+//        let fView = UIView(frame: CGRectMake(0, 0, self.myTableView.frame.size.width, 30))
+//        return fView
+//    }
     
 }
